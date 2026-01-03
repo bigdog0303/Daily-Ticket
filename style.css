@@ -36,7 +36,10 @@ body {
 
 .dot { margin: 0 6px; }
 
-.actions { display: flex; gap: 10px; }
+.actions {
+  display: flex;
+  gap: 10px;
+}
 
 .btn {
   padding: 10px 14px;
@@ -67,7 +70,9 @@ body {
 }
 
 @media (min-width: 720px) {
-  .grid { grid-template-columns: 1fr 1fr; }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .field span {
@@ -86,24 +91,42 @@ input, textarea {
   color: var(--text);
 }
 
+/* --- RULE --- */
 .rule {
   border-left: 3px solid var(--accent);
   padding-left: 10px;
   margin-bottom: 12px;
 }
 
+/* --- CHECKLIST (FIXED) --- */
 .checklist {
-  display: grid;
-  gap: 10px;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: flex-start;
 }
 
 .check {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 12px;
+  width: 100%;
 }
 
+.check input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.check span {
+  line-height: 1.3;
+  text-align: left;
+}
+
+/* --- FOOTER --- */
 .footer {
   color: var(--muted);
   font-size: 12px;
