@@ -16,68 +16,23 @@ function tick() {
 setInterval(tick, 250);
 tick();
 
-const ids = [
-  "bias","model","level","invalidation","notes",
-  "chkBiasWritten","chkTriggerTrue","chkExecuted","chkSaveLocal"
-];
-
-const els = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
-const KEY = "trade-ticket";
-
-function getState() {
-  return Object.fromEntries(
-    ids.map(id => [
-      id,
-      els[id].type === "checkbox" ? els[id].checked : els[id].value
-    ])
-  );
-}
-
-function save() {
-  if (els.chkSaveLocal.checked) {
-    localStorage.setItem(KEY, JSON.stringify(getState()));
-  }
-}
-
-function load() {
-  const raw = localStorage.getItem(KEY);
-  if (!raw) return;
-  const data = JSON.parse(raw);
-  ids.forEach(id => {
-    if (els[id].type === "checkbox") els[id].checked = data[id];
-    else els[id].value = data[id];
-  });
-}
-
-ids.forEach(id => els[id].addEventListener("input", save));
-load();
+const fields = ["bias", "model", "level", "invalidation"];
+const els = Object.fromEntries(fields.map(id => [id, document.getElementById(id)]));
 
 document.getElementById("btnReset").onclick = () => {
-  ids.forEach(id => {
-    if (els[id].type === "checkbox") els[id].checked = false;
-    else els[id].value = "";
-  });
-  localStorage.removeItem(KEY);
+  fields.forEach(id => els[id].value = "");
 };
 
 document.getElementById("btnCopy").onclick = async () => {
-  const s = getState();
   const text = `
 Daily Trading Ticket
 Date: ${liveDate.textContent}
 Time: ${liveTime.textContent}
 
-Bias: ${s.bias}
-Model: ${s.model}
-Level: ${s.level}
-Invalidation: ${s.invalidation}
-
-Bias Written: ${s.chkBiasWritten}
-Trigger True: ${s.chkTriggerTrue}
-Executed: ${s.chkExecuted}
-
-Notes:
-${s.notes}
+Bias: ${els.bias.value}
+Model: ${els.model.value}
+Level: ${els.level.value}
+Invalidation: ${els.invalidation.value}
   `;
   await navigator.clipboard.writeText(text.trim());
   alert("Ticket copied");
