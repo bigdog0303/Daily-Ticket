@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daily Trading Ticket</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+
+    <header class="top">
+      <div>
+        <h1>Daily Trading Ticket</h1>
+        <div class="meta">
+          <span id="liveDate"></span>
+          <span class="dot">•</span>
+          <span id="liveTime"></span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="btnCopy" class="btn">Copy</button>
+        <button id="btnReset" class="btn btn-ghost">Reset</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Bias Lock</h2>
+
+      <div class="grid">
+        <label class="field">
+          <span>Bias (Long / Short)</span>
+          <input id="bias" placeholder="Short" />
+        </label>
+
+        <label class="field">
+          <span>Ideal Model</span>
+          <input id="model" placeholder="BOS + FVG / IFVG" />
+        </label>
+
+        <label class="field">
+          <span>Primary Level / PD Array</span>
+          <input id="level" placeholder="15m FVG / 1h IFVG / HOD" />
+        </label>
+
+        <label class="field">
+          <span>Invalidation</span>
+          <input id="invalidation" placeholder="5m close through FVG" />
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Execution Rule</h2>
+
+      <p class="rule">
+        If my bias is written and my exact model prints, I must execute the
+        first valid setup at full size. No discretion. No delay.
+      </p>
+
+      <div class="checklist">
+        <label class="check">
+          <input id="chkBiasWritten" type="checkbox" />
+          <span>Bias written & frozen</span>
+        </label>
+
+        <label class="check">
+          <input id="chkTriggerTrue" type="checkbox" />
+          <span>Trigger TRUE (BOS + FVG/IFVG)</span>
+        </label>
+
+        <label class="check">
+          <input id="chkExecuted" type="checkbox" />
+          <span>Executed first valid setup</span>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Notes</span>
+        <textarea id="notes" rows="4"></textarea>
+      </label>
+    </section>
+
+    <section class="footer">
+      <label class="check tiny">
+        <input id="chkSaveLocal" type="checkbox" />
+        <span>Save locally on this device</span>
+      </label>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
